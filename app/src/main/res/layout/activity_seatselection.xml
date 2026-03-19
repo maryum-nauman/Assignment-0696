@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="#c4c4c4">
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/backbutton"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvmoviename"
+        android:text="Movie Name"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Screen X"
+        android:id="@+id/tvscreen"
+        android:layout_below="@id/tvmoviename"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/tvscreen">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theater"
+            android:id="@+id/tvTheatretxt"
+            android:textSize="14sp"
+            android:textColor="#555555"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hall"
+            android:id="@+id/tvHalltxt"
+            android:textSize="14sp"
+            android:textColor="#555555"/>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:id="@+id/tvDatetxt"
+            android:textSize="14sp"
+            android:textColor="#555555"/>
+
+        <View
+            android:layout_width="55dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:id="@+id/tvTimetxt"
+            android:textSize="14sp"
+            android:textColor="#555555"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear2"
+        android:layout_below="@id/linear"
+        android:layout_marginLeft="16dp"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stars (90 Mall)"
+        android:id="@+id/tvTheatre"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hall"
+        android:id="@+id/tvHall"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/tvDate"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/tvTime"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/blackBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear2"
+        android:layout_marginTop="20dp"
+        android:background="#000000" />
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear3"
+        android:layout_alignTop="@id/blackBackground"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="40dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivscreen"
+            android:src="@drawable/screen"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear4"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp">
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnBookTickets"
+            android:text="Book Tickets"
+            android:textColor="@color/white"
+            android:backgroundTint="#e5000e"/>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnProceed"
+            android:text="Proceed To Snacks"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"/>
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linear4"
+        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_width="400dp"
+            android:layout_height="80dp"
+            android:src="@drawable/seatstatus"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

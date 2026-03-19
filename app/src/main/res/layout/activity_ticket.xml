@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:id="@+id/main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/header"
+        android:layout_marginTop="20dp"
+        android:padding="15dp">
+        
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnbackticket"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/backticket"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Details"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnmenuticket"
+            android:src="@drawable/menuticket"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movieinfo"
+        android:orientation="horizontal"
+        android:layout_below="@id/header">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:id="@+id/ticketimage"
+            android:src="@drawable/thedarkknight"
+            android:layout_marginTop="12dp"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="6dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvticketname"
+                android:text="Movie Name"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:id="@+id/ivticketdeets"
+                android:src="@drawable/ticketscreendeets"
+                android:layout_marginStart="12dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/movieinfo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theater"
+            android:id="@+id/tvTheatretxt"
+            android:textSize="14sp"
+            android:textColor="#7c7c7c" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hall"
+            android:id="@+id/tvHalltxt"
+            android:textSize="14sp"
+            android:textColor="#7c7c7c"/>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:id="@+id/tvDatetxt"
+            android:textSize="14sp"
+            android:textColor="#7c7c7c"/>
+
+        <View
+            android:layout_width="55dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:id="@+id/tvTimetxt"
+            android:textSize="14sp"
+            android:textColor="#7c7c7c"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear2"
+        android:layout_below="@id/linear"
+        android:layout_marginLeft="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stars (90 Mall)"
+            android:id="@+id/tvTheatre"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hall"
+            android:id="@+id/tvHall"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:id="@+id/tvDate"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:id="@+id/tvTime"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivline"
+        android:src="@drawable/line"
+        android:layout_below="@id/linear2"/>
+
+    <TextView
+        android:id="@+id/tvSummaryList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivline"
+        android:layout_above="@id/tvTotalLabel"
+        android:padding="16dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:lineSpacingExtra="4dp" />
+
+    <TextView
+        android:id="@+id/tvTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_above="@id/btnSend"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tvTotalValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00 USD"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/btnSend"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"/>
+
+
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Send Ticket"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#e5000e"
+        android:layout_alignParentBottom="true"
+        app:cornerRadius="12dp"/>
+</RelativeLayout>
