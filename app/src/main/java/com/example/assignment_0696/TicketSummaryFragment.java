@@ -11,10 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class TicketSummary extends AppCompatActivity {
+public class TicketSummaryFragment extends AppCompatActivity {
 
     private java.util.ArrayList<String> selectedSeatsList = new java.util.ArrayList<>();
     @Override

@@ -3,6 +3,7 @@ package com.example.assignment_0696;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     Context context;
     ArrayList<Movie> list;
+
+    private String getTimeForMovie(String movieName) {
+        if (movieName.equals("The Dark Knight")) return "11:30";
+        else if (movieName.equals("Inception")) return "1:30";
+        else if (movieName.equals("Interstellar")) return "3:30";
+        else return "5:30";
+    }
+
+    private String getHallForMovie(String movieName) {
+        if (movieName.equals("The Dark Knight")) return "1";
+        else if (movieName.equals("Inception")) return "2";
+        else if (movieName.equals("Interstellar")) return "3";
+        else return "4";
+    }
 
     public MovieAdapter(Context context, ArrayList<Movie> list) {
         this.context = context;
@@ -47,8 +62,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         });
 
         holder.book.setOnClickListener(v -> {
-            Toast.makeText(context, "Go to Seat Selection", Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("movie_name", movie.getName());
+            bundle.putString("time", getTimeForMovie(movie.getName()));
+            bundle.putString("hallno", getHallForMovie(movie.getName()));
+            bundle.putBoolean("isComingSoon", movie.isComingSoon());
+
+            SeatSelectionFragment fragment = new SeatSelectionFragment();
+            fragment.setArguments(bundle);
+
+            ((MainActivity) context).loadFragment(fragment);
         });
+
+
     }
 
     @Override

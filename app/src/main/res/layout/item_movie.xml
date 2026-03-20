@@ -41,7 +41,7 @@
                 android:text="Book Seats"
                 android:backgroundTint="#FF0000"
                 android:textSize="16sp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="24dp"/>
 
             <View
                 android:layout_width="4dp"
@@ -54,7 +54,7 @@
                 android:backgroundTint="@color/white"
                 android:text="Trailer"
                 android:textColor="@color/black"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:textSize="16sp"/>
 
         </LinearLayout>

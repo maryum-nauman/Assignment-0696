@@ -24,14 +24,17 @@ public class ComingSoonFragment extends Fragment {
 
         movieList = new ArrayList<>();
 
-        movieList.add(new Movie("Avatar 3", "Sci-Fi", R.drawable.inception,
-                "https://www.youtube.com/watch?v=d9MyW72ELq0", true));
+        movieList.add(new Movie("Avengers Doomsday", "Sci-Fi/Action", R.drawable.avengers,
+                "https://www.youtube.com/watch?v=399Ez7WHK5s", true));
 
-        movieList.add(new Movie("Joker 2", "Drama", R.drawable.interstellar,
-                "https://www.youtube.com/watch?v=_OKAwz2MsJs", true));
+        movieList.add(new Movie("Spider-Man: Brand New Day", "Adventure/Sci-Fi", R.drawable.spiderman,
+                "https://www.youtube.com/watch?v=8TZMtslA3UY", true));
 
-        movieList.add(new Movie("Dune Part 2", "Sci-Fi", R.drawable.theshawshankredemption,
-                "https://www.youtube.com/watch?v=Way9Dexny3w", true));
+        movieList.add(new Movie("Dune: Part 3", "Sci-Fi/Adventure", R.drawable.dune,
+                "https://www.youtube.com/watch?v=3_9vCamtuPY", true));
+
+        movieList.add(new Movie("Scary Movie 6", "Horror/Comedy", R.drawable.scarymovie,
+                "https://www.youtube.com/watch?v=wUVjdquQAxU", true));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MovieAdapter(getContext(), movieList));

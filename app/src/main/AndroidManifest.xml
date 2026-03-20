@@ -12,13 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment0696">
         <activity
-            android:name=".TicketSummary"
+            android:name=".TicketSummaryFragment"
             android:exported="false" />
         <activity
-            android:name=".SnacksandDrinks"
-            android:exported="false"/>
-        <activity
-            android:name=".SeatSelectionActivity"
+            android:name=".SnacksandDrinksFragment"
             android:exported="false"/>
         <activity
             android:name=".OnboardingActivity"

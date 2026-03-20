@@ -8,7 +8,7 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-public class SnacksandDrinks extends AppCompatActivity{
+public class SnacksandDrinksFragment extends AppCompatActivity{
     private int pc,nachos,sd,cm;
     private java.util.ArrayList<String> selectedSeatsList = new java.util.ArrayList<>();
     @Override
@@ -82,7 +82,7 @@ public class SnacksandDrinks extends AppCompatActivity{
 
         Button btnConfirmOrder=findViewById(R.id.btnConfirmOrder);
         btnConfirmOrder.setOnClickListener(v -> {
-            Intent intent=new Intent(SnacksandDrinks.this, TicketSummary.class);
+            Intent intent=new Intent(SnacksandDrinksFragment.this, TicketSummaryFragment.class);
             intent.putStringArrayListExtra("selected_seats", selectedSeatsList);
             intent.putExtra("movie_name", moviename);
             intent.putExtra("seatCount",seatCount);

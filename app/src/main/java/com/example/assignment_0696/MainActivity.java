@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load HomeFragment by default
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }
