@@ -1,99 +1,70 @@
 package com.example.assignment_0696;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-public class SnacksandDrinksFragment extends AppCompatActivity{
-    private int pc,nachos,sd,cm;
-    private java.util.ArrayList<String> selectedSeatsList = new java.util.ArrayList<>();
+import java.util.ArrayList;
+
+public class SnacksandDrinksFragment extends Fragment {
+
+    private int pc, nachos, sd, cm;
+    private ArrayList<String> selectedSeatsList;
+
+    public SnacksandDrinksFragment() {
+        super(R.layout.fragment_snacks); // 👈 IMPORTANT (rename XML)
+    }
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_snacks);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        String moviename=getIntent().getStringExtra("movie_name");
-        int seatCount=getIntent().getIntExtra("seatCount",1);
-        selectedSeatsList=getIntent().getStringArrayListExtra("selected_seats");
-        String date=getIntent().getStringExtra("date");
-        String time = getIntent().getStringExtra("time");
-        String hall = getIntent().getStringExtra("hallno");
+        // 🔥 Get data from bundle
+        Bundle args = getArguments();
 
-        Button btnpluspc=findViewById(R.id.btnpluspc);
-        Button btnminuspc=findViewById(R.id.btnminuspc);
-        TextView tvcountpc=findViewById(R.id.tvcountpc);
-        Button btnplusn=findViewById(R.id.btnplusn);
-        Button btnminusn=findViewById(R.id.btnminusn);
-        TextView tvcountn=findViewById(R.id.tvcountn);
-        Button btnplussd=findViewById(R.id.btnplussd);
-        Button btnminussd=findViewById(R.id.btnminussd);
-        TextView tvcountsd=findViewById(R.id.tvcountsd);
-        Button btnpluscm=findViewById(R.id.btnpluscm);
-        Button btnminuscm=findViewById(R.id.btnminuscm);
-        TextView tvcountcm=findViewById(R.id.tvcountcm);
+        String moviename = args.getString("movie_name");
+        int seatCount = args.getInt("seatCount");
+        selectedSeatsList = args.getStringArrayList("selected_seats");
+        String date = args.getString("date");
+        String time = args.getString("time");
+        String hall = args.getString("hallno");
 
-        btnpluspc.setOnClickListener(v -> {
-            pc=pc+1;
-            tvcountpc.setText(String.valueOf(pc));
-        });
-        btnminuspc.setOnClickListener(v -> {
-            if(pc>0){
-                pc=pc-1;
-                tvcountpc.setText(String.valueOf(pc));
-            }
-        });
+        ListView listView = view.findViewById(R.id.snackList);
 
-        btnplusn.setOnClickListener(v -> {
-            nachos=nachos+1;
-            tvcountn.setText(String.valueOf(nachos));
-        });
-        btnminusn.setOnClickListener(v -> {
-            if(nachos>0){
-                nachos=nachos-1;
-                tvcountn.setText(String.valueOf(nachos));
-            }
-        });
+        ArrayList<Snack> snackList = new ArrayList<>();
 
-        btnplussd.setOnClickListener(v -> {
-            sd=sd+1;
-            tvcountsd.setText(String.valueOf(sd));
-        });
-        btnminussd.setOnClickListener(v -> {
-            if(sd>0){
-                sd=sd-1;
-                tvcountsd.setText(String.valueOf(sd));
-            }
-        });
+        snackList.add(new Snack(R.drawable.popcorn, "Popcorn", "$8.99"));
+        snackList.add(new Snack(R.drawable.nachos, "Nachos", "$7.99"));
+        snackList.add(new Snack(R.drawable.softdrink, "Soft Drink", "$5.99"));
+        snackList.add(new Snack(R.drawable.candymix, "Candy Mix", "$6.99"));
 
-        btnpluscm.setOnClickListener(v -> {
-            cm=cm+1;
-            tvcountcm.setText(String.valueOf(cm));
-        });
-        btnminuscm.setOnClickListener(v -> {
-            if(cm>0){
-                cm=cm-1;
-                tvcountcm.setText(String.valueOf(cm));
-            }
-        });
+        SnackAdapter adapter = new SnackAdapter(getActivity(), snackList);
+        listView.setAdapter(adapter);
 
-        Button btnConfirmOrder=findViewById(R.id.btnConfirmOrder);
+        Button btnConfirmOrder = view.findViewById(R.id.btnConfirmOrder);
+
         btnConfirmOrder.setOnClickListener(v -> {
-            Intent intent=new Intent(SnacksandDrinksFragment.this, TicketSummaryFragment.class);
-            intent.putStringArrayListExtra("selected_seats", selectedSeatsList);
-            intent.putExtra("movie_name", moviename);
-            intent.putExtra("seatCount",seatCount);
-            intent.putExtra("popcorn",pc);
-            intent.putExtra("nachos",nachos);
-            intent.putExtra("softdrink",sd);
-            intent.putExtra("candymix",cm);
-            intent.putExtra("time",time);
-            intent.putExtra("date",date);
-            intent.putExtra("hallno",hall);
-            startActivity(intent);
+
+            int pc = snackList.get(0).getQuantity();
+            int nachos = snackList.get(1).getQuantity();
+            int sd = snackList.get(2).getQuantity();
+            int cm = snackList.get(3).getQuantity();
+
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("selected_seats", selectedSeatsList);
+            bundle.putString("movie_name", moviename);
+            bundle.putInt("seatCount", seatCount);
+            bundle.putInt("popcorn", pc);
+            bundle.putInt("nachos", nachos);
+            bundle.putInt("softdrink", sd);
+            bundle.putInt("candymix", cm);
+            bundle.putString("time", time);
+            bundle.putString("date", date);
+            bundle.putString("hallno", hall);
         });
     }
 }

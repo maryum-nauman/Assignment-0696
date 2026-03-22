@@ -102,19 +102,17 @@ public class SeatSelectionFragment extends Fragment {
 
         btnProceed.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
+            bundle.putStringArrayList("selected_seats", selectedSeatsList);
             bundle.putString("movie_name", movieName);
             bundle.putInt("seatCount", selectedCount);
+            bundle.putString("time", time);
+            bundle.putString("date", finalDate);
+            bundle.putString("hallno", hall);
 
-            Intent intent = new Intent(getActivity(), SnacksandDrinksFragment.class);
+            SnacksandDrinksFragment fragment = new SnacksandDrinksFragment();
+            fragment.setArguments(bundle);
 
-            intent.putStringArrayListExtra("selected_seats", selectedSeatsList);
-            intent.putExtra("movie_name", movieName);
-            intent.putExtra("seatCount", selectedCount);
-            intent.putExtra("time", time);
-            intent.putExtra("date", finalDate);
-            intent.putExtra("hallno", hall);
-
-            startActivity(intent);
+            ((MainActivity) requireActivity()).loadFragment(fragment);
         });
 
         generateSeats(linear3, true, btnProceed);
