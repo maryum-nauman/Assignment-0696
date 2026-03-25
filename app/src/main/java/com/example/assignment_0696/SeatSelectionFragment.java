@@ -68,7 +68,6 @@ public class SeatSelectionFragment extends Fragment {
                 startActivity(intent);
             });
 
-            // Disable seats
             generateSeats(linear3, false, btnProceed);
 
             return;
@@ -82,18 +81,16 @@ public class SeatSelectionFragment extends Fragment {
                 Toast.makeText(getContext(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putString("movie_name", movieName);
+                bundle.putStringArrayList("selected_seats", selectedSeatsList);
                 bundle.putInt("seatCount", selectedCount);
+                bundle.putString("time", time);
+                bundle.putString("date", finalDate);
+                bundle.putString("hallno", hall);
 
-                Intent intent = new Intent(getActivity(), TicketSummaryFragment.class);
+                TicketSummaryFragment fragment = new TicketSummaryFragment();
+                fragment.setArguments(bundle);
 
-                intent.putStringArrayListExtra("selected_seats", selectedSeatsList);
-                intent.putExtra("movie_name", movieName);
-                intent.putExtra("seatCount", selectedCount);
-                intent.putExtra("time", time);
-                intent.putExtra("date", finalDate);
-                intent.putExtra("hallno", hall);
-
-                startActivity(intent);
+                ((MainActivity) requireActivity()).loadFragment(fragment);
 
             } else {
                 Toast.makeText(getContext(), "Seat Not Selected!", Toast.LENGTH_SHORT).show();

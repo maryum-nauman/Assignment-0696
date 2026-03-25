@@ -40,9 +40,9 @@
         android:id="@+id/snackList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="6dp"
+        android:padding="8dp"
         android:layout_above="@id/btnConfirmOrder"
-        android:layout_below="@id/tvSelectItems"/>
+        android:layout_below="@id/tvSnacks"/>
 
     <Button
         android:id="@+id/btnConfirmOrder"

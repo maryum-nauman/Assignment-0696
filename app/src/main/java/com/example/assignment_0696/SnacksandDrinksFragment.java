@@ -17,13 +17,12 @@ public class SnacksandDrinksFragment extends Fragment {
     private ArrayList<String> selectedSeatsList;
 
     public SnacksandDrinksFragment() {
-        super(R.layout.fragment_snacks); // 👈 IMPORTANT (rename XML)
+        super(R.layout.fragment_snacks);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        // 🔥 Get data from bundle
         Bundle args = getArguments();
 
         String moviename = args.getString("movie_name");
@@ -65,6 +64,12 @@ public class SnacksandDrinksFragment extends Fragment {
             bundle.putString("time", time);
             bundle.putString("date", date);
             bundle.putString("hallno", hall);
+
+
+            TicketSummaryFragment fragment = new TicketSummaryFragment();
+            fragment.setArguments(bundle);
+
+            ((MainActivity) requireActivity()).loadFragment(fragment);
         });
     }
 }
