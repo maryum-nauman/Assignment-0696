@@ -19,10 +19,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class HomeFragment extends Fragment {
-
     TabLayout tabLayout;
     ViewPager2 viewPager;
-
     public HomeFragment() {
         super(R.layout.fragment_home);
     }

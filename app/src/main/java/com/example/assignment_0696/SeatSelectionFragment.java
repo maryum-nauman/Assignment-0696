@@ -35,10 +35,19 @@ public class SeatSelectionFragment extends Fragment {
         TextView tvHall = view.findViewById(R.id.tvHall);
 
         Bundle args = getArguments();
+
         String movieName = args.getString("movie_name");
         String time = args.getString("time");
         String hall = args.getString("hallno");
         boolean isComingSoon = args.getBoolean("isComingSoon");
+
+        if (args != null) {
+            ArrayList<String> savedSeats = args.getStringArrayList("selected_seats");
+            if (savedSeats != null) {
+                selectedSeatsList = savedSeats;
+                selectedCount = selectedSeatsList.size();
+            }
+        }
 
         tvTitle.setText(movieName);
         tvTime.setText(time);
@@ -73,8 +82,13 @@ public class SeatSelectionFragment extends Fragment {
             return;
         }
 
-        btnProceed.setEnabled(false);
-        btnProceed.setAlpha(0.5f);
+        if (selectedCount > 0) {
+            btnProceed.setEnabled(true);
+            btnProceed.setAlpha(1f);
+        } else {
+            btnProceed.setEnabled(false);
+            btnProceed.setAlpha(0.5f);
+        }
 
         btnBookSeats.setOnClickListener(v -> {
             if (selectedCount > 0) {
@@ -105,6 +119,7 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putString("time", time);
             bundle.putString("date", finalDate);
             bundle.putString("hallno", hall);
+            bundle.putInt("selected_count", selectedCount);
 
             SnacksandDrinksFragment fragment = new SnacksandDrinksFragment();
             fragment.setArguments(bundle);
@@ -147,30 +162,33 @@ public class SeatSelectionFragment extends Fragment {
                 seat.setLayoutParams(params);
                 seat.setBackgroundResource(R.drawable.seatselector);
 
+                String seatName = "R" + r + "C" + c;
+
+                // Restore visual state: if seat was in list, make it green
+                if (selectedSeatsList.contains(seatName)) {
+                    seat.setSelected(true);
+                }
+
                 if (!clickable) {
                     seat.setEnabled(false);
                 }
 
-                int finalR = r;
-                int finalC = c;
 
                 seat.setOnClickListener(v -> {
+                    boolean isSelectedNow = !v.isSelected();
+                    v.setSelected(isSelectedNow);
 
-                    if (!v.isEnabled()) return;
-
-                    boolean selected = !v.isSelected();
-                    v.setSelected(selected);
-
-                    String seatName = "R" + finalR + "C" + finalC;
-
-                    if (selected) {
-                        selectedCount++;
-                        selectedSeatsList.add(seatName);
+                    if (isSelectedNow) {
+                        if (!selectedSeatsList.contains(seatName)) {
+                            selectedSeatsList.add(seatName);
+                        }
                     } else {
-                        selectedCount--;
                         selectedSeatsList.remove(seatName);
                     }
 
+                    selectedCount = selectedSeatsList.size();
+
+                    // Update UI Button
                     if (selectedCount > 0) {
                         btnProceed.setEnabled(true);
                         btnProceed.setAlpha(1f);
@@ -182,7 +200,6 @@ public class SeatSelectionFragment extends Fragment {
 
                 row.addView(seat);
             }
-
             parent.addView(row);
         }
     }
