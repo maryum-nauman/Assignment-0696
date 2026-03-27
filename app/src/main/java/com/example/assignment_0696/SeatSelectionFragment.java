@@ -1,26 +1,24 @@
 package com.example.assignment_0696;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import android.content.Intent;
 import android.net.Uri;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class SeatSelectionFragment extends Fragment {
-
     private int selectedCount = 0;
     private ArrayList<String> selectedSeatsList = new ArrayList<>();
+    private ArrayList<String> bookedSeats = new ArrayList<>();
 
     public SeatSelectionFragment() {
         super(R.layout.fragment_seatselection);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
@@ -47,6 +45,14 @@ public class SeatSelectionFragment extends Fragment {
                 selectedSeatsList = savedSeats;
                 selectedCount = selectedSeatsList.size();
             }
+        }
+        if (!isComingSoon) {
+            bookedSeats.add("R0C1");
+            bookedSeats.add("R1C3");
+            bookedSeats.add("R2C4");
+            bookedSeats.add("R3C2");
+            bookedSeats.add("R4C5");
+            bookedSeats.add("R5C1");
         }
 
         tvTitle.setText(movieName);
@@ -146,8 +152,7 @@ public class SeatSelectionFragment extends Fragment {
 
                 ImageButton seat = new ImageButton(getContext());
 
-                LinearLayout.LayoutParams params =
-                        new LinearLayout.LayoutParams(seatSize, seatSize);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(seatSize, seatSize);
                 params.setMargins(seatMargin, seatMargin, seatMargin, seatMargin);
 
                 if (r==0 && c == 3) params.leftMargin = 40;
@@ -160,11 +165,13 @@ public class SeatSelectionFragment extends Fragment {
                 if (r==6 && c == 4) params.leftMargin = 40;
 
                 seat.setLayoutParams(params);
+                String seatName = "R" + r + "C" + c;
                 seat.setBackgroundResource(R.drawable.seatselector);
 
-                String seatName = "R" + r + "C" + c;
-
-                // Restore visual state: if seat was in list, make it green
+                if (bookedSeats.contains(seatName)) {
+                    seat.setColorFilter(Color.RED);
+                    seat.setEnabled(false);
+                }
                 if (selectedSeatsList.contains(seatName)) {
                     seat.setSelected(true);
                 }
@@ -172,7 +179,6 @@ public class SeatSelectionFragment extends Fragment {
                 if (!clickable) {
                     seat.setEnabled(false);
                 }
-
 
                 seat.setOnClickListener(v -> {
                     boolean isSelectedNow = !v.isSelected();
@@ -185,10 +191,7 @@ public class SeatSelectionFragment extends Fragment {
                     } else {
                         selectedSeatsList.remove(seatName);
                     }
-
                     selectedCount = selectedSeatsList.size();
-
-                    // Update UI Button
                     if (selectedCount > 0) {
                         btnProceed.setEnabled(true);
                         btnProceed.setAlpha(1f);
@@ -197,7 +200,6 @@ public class SeatSelectionFragment extends Fragment {
                         btnProceed.setAlpha(0.5f);
                     }
                 });
-
                 row.addView(seat);
             }
             parent.addView(row);

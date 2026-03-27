@@ -40,14 +40,11 @@ public class SnacksandDrinksFragment extends Fragment {
         snackList.add(new Snack(R.drawable.nachos, "Nachos", "$7.99"));
         snackList.add(new Snack(R.drawable.softdrink, "Soft Drink", "$5.99"));
         snackList.add(new Snack(R.drawable.candymix, "Candy Mix", "$6.99"));
-
         SnackAdapter adapter = new SnackAdapter(getActivity(), snackList);
         listView.setAdapter(adapter);
 
         Button btnConfirmOrder = view.findViewById(R.id.btnConfirmOrder);
-
         btnConfirmOrder.setOnClickListener(v -> {
-
             int pc = snackList.get(0).getQuantity();
             int nachos = snackList.get(1).getQuantity();
             int sd = snackList.get(2).getQuantity();
@@ -64,7 +61,6 @@ public class SnacksandDrinksFragment extends Fragment {
             bundle.putString("time", time);
             bundle.putString("date", date);
             bundle.putString("hallno", hall);
-
 
             TicketSummaryFragment fragment = new TicketSummaryFragment();
             fragment.setArguments(bundle);

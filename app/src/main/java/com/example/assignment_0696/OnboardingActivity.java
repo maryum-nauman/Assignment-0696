@@ -12,7 +12,6 @@ public class OnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
         Button btn = findViewById(R.id.btnGetStarted);
-
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
             startActivity(intent);

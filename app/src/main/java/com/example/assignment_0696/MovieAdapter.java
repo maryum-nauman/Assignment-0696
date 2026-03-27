@@ -11,43 +11,34 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-
     Context context;
     ArrayList<Movie> list;
-
     private String getTimeForMovie(String movieName) {
         if (movieName.equals("The Dark Knight")) return "11:30";
         else if (movieName.equals("Inception")) return "1:30";
         else if (movieName.equals("Interstellar")) return "3:30";
         else return "5:30";
     }
-
     private String getHallForMovie(String movieName) {
         if (movieName.equals("The Dark Knight")) return "1";
         else if (movieName.equals("Inception")) return "2";
         else if (movieName.equals("Interstellar")) return "3";
         else return "4";
     }
-
     public MovieAdapter(Context context, ArrayList<Movie> list) {
         this.context = context;
         this.list = list;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie movie = list.get(position);
@@ -60,7 +51,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(movie.getTrailerUrl()));
             context.startActivity(intent);
         });
-
         holder.book.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("movie_name", movie.getName());
@@ -73,20 +63,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
             ((MainActivity) context).loadFragment(fragment);
         });
-
-
     }
-
     @Override
     public int getItemCount() {
         return list.size();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView name, genre;
         Button trailer, book;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.movieImage);

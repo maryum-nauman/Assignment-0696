@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(new HomeFragment());
         }
     }
-
-    // Method to switch fragments (IMPORTANT for later use)
     public void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

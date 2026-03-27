@@ -1,5 +1,4 @@
 package com.example.assignment_0696;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,10 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -28,7 +25,6 @@ public class TicketSummaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-
         String moviename = args.getString("movie_name");
         int seatCount = args.getInt("seatCount");
         selectedSeatsList = args.getStringArrayList("selected_seats");
@@ -66,47 +62,36 @@ public class TicketSummaryFragment extends Fragment {
         } else if (moviename.equals("The Shawshank Redemption")) {
             ivmovie.setImageResource(R.drawable.theshawshankredemption);
         }
-
         double total = 0;
         double ticketPrice = 16.0;
-
         StringBuilder summary = new StringBuilder("Tickets\n");
-
         if (selectedSeatsList != null) {
             for (String seat : selectedSeatsList) {
                 summary.append(seat).append("   16 USD\n");
                 total += ticketPrice;
             }
         }
-
         summary.append("\nSnacks\n");
-
         if (pc > 0) {
             summary.append("Popcorn x").append(pc).append(" = ").append(pc * 8.99).append("\n");
             total += pc * 8.99;
         }
-
         if (nachos > 0) {
             summary.append("Nachos x").append(nachos).append(" = ").append(nachos * 7.99).append("\n");
             total += nachos * 7.99;
         }
-
         if (sd > 0) {
             summary.append("SoftDrink x").append(sd).append(" = ").append(sd * 5.99).append("\n");
             total += sd * 5.99;
         }
-
         if (cm > 0) {
             summary.append("CandyMix x").append(cm).append(" = ").append(cm * 6.99).append("\n");
             total += cm * 6.99;
         }
-
         tvSummaryList.setText(summary.toString());
         tvTotalValue.setText(String.format(Locale.getDefault(), "%.2f USD", total));
-
         SharedPreferences prefs = requireActivity().getSharedPreferences("BookingPrefs", 0);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putString("movie", moviename);
         editor.putInt("seats", seatCount);
         editor.putFloat("total", (float) total);

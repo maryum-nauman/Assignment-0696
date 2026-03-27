@@ -22,7 +22,8 @@
         android:src="@drawable/menuticket"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_alignParentEnd="true"
-        android:layout_margin="12dp"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="10dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
