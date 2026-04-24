@@ -131,6 +131,7 @@ public class SeatSelectionFragment extends Fragment {
             fragment.setArguments(bundle);
 
             ((MainActivity) requireActivity()).loadFragment(fragment);
+
         });
 
         generateSeats(linear3, true, btnProceed);

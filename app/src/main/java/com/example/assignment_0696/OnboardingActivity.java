@@ -13,7 +13,7 @@ public class OnboardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
         Button btn = findViewById(R.id.btnGetStarted);
         btn.setOnClickListener(v -> {
-            Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
+            Intent intent = new Intent(OnboardingActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
 
