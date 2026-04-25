@@ -17,6 +17,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeFragment extends Fragment {
     TabLayout tabLayout;
@@ -44,16 +46,27 @@ public class HomeFragment extends Fragment {
             popupMenu.inflate(R.menu.menu_home);
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.viewBooking) {
+
+                    // ✅ Read using userId as key
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if (currentUser == null) {
+                        Toast.makeText(getContext(), "Not logged in", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+
+                    String userId = currentUser.getUid();
                     SharedPreferences prefs =
                             requireContext().getSharedPreferences("BookingPrefs", Context.MODE_PRIVATE);
-                    String movie = prefs.getString("movie", null);
+
+                    String movie = prefs.getString(userId + "_movie", null);
+
                     if (movie == null) {
                         Toast.makeText(getContext(),
                                 "No previous booking found",
                                 Toast.LENGTH_SHORT).show();
                     } else {
-                        int seats = prefs.getInt("seats", 0);
-                        float total = prefs.getFloat("total", 0);
+                        int seats     = prefs.getInt(userId + "_seats", 0);
+                        float total   = prefs.getFloat(userId + "_total", 0);
 
                         new AlertDialog.Builder(requireContext())
                                 .setTitle("Last Booking")

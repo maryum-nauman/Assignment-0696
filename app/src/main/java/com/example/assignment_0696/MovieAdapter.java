@@ -19,9 +19,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     ArrayList<Movie> list;
     private String getTimeForMovie(String movieName) {
         if (movieName.equals("The Dark Knight")) return "11:30";
-        else if (movieName.equals("Inception")) return "1:30";
-        else if (movieName.equals("Interstellar")) return "3:30";
-        else return "5:30";
+        else if (movieName.equals("Inception")) return "14:30";
+        else if (movieName.equals("Interstellar")) return "17:30";
+        else return "21:30";
     }
     private String getHallForMovie(String movieName) {
         if (movieName.equals("The Dark Knight")) return "1";
