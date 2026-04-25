@@ -1,0 +1,54 @@
+{
+  "now_showing": [
+    {
+      "name": "The Dark Knight",
+      "genre": "Action | 152 min",
+      "image": "thedarkknight",
+      "trailerUrl": "https://www.youtube.com/watch?v=EXeTwQWrcwY"
+    },
+    {
+      "name": "Inception",
+      "genre": "Sci-Fi | 148 min",
+      "image": "inception",
+      "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0"
+    },
+    {
+      "name": "Interstellar",
+      "genre": "Sci-Fi | 169 min",
+      "image": "interstellar",
+      "trailerUrl": "https://www.youtube.com/watch?v=zSWdZVtXT7E"
+    },
+    {
+      "name": "The ShawShank Redemption",
+      "genre": "Drama | 142 min",
+      "image": "theshawshankredemption",
+      "trailerUrl": "https://www.youtube.com/watch?v=PLl99DlL6b4"
+    }
+  ],
+  "coming_soon": [
+    {
+      "name": "Avengers Doomsday",
+      "genre": "Sci-Fi/Action",
+      "image": "avengers",
+      "trailerUrl": "https://www.youtube.com/watch?v=399Ez7WHK5s"
+    },
+    {
+      "name": "Spider-Man: Brand New Day",
+      "genre": "Adventure/Sci-Fi",
+      "image": "spiderman",
+      "trailerUrl": "https://www.youtube.com/watch?v=8TZMtslA3UY"
+    },
+    {
+      "name": "Dune: Part 3",
+      "genre": "Sci-Fi/Adventure",
+      "image": "dune",
+      "trailerUrl": "https://www.youtube.com/watch?v=3_9vCamtuPY"
+    },
+    {
+      "name": "Scary Movie 6",
+      "genre": "Horror/Comedy",
+      "image": "scarymovie",
+      "trailerUrl": "https://www.youtube.com/watch?v=wUVjdquQAxU"
+    }
+  ]
+}

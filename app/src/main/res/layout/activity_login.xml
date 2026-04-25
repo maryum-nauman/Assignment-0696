@@ -9,7 +9,7 @@
         android:id="@+id/btnBack"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_back_button" />
+        android:src="@drawable/backticket" />
 
     <TextView
         android:id="@+id/tvLoginTitle"
