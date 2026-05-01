@@ -2,6 +2,9 @@ package com.example.assignment_0696;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +32,11 @@ public class MyBookingsFragment extends Fragment {
     ArrayList<Booking> bookingList;
     BookingAdapter adapter;
     DatabaseReference bookingsRef;
+    TextView tvNoBookings;
+    ArrayList<Booking> fullList= new ArrayList<>();
+    ImageButton btnBack;
+
+    EditText etSearch;
 
     public MyBookingsFragment() {
         super(R.layout.fragment_my_booking);
@@ -38,10 +46,32 @@ public class MyBookingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         rvBookings  = view.findViewById(R.id.rvBookings);
         bookingList = new ArrayList<>();
+        tvNoBookings = view.findViewById(R.id.tvNoBookings);
 
         rvBookings.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new BookingAdapter(getContext(), bookingList, this::onCancelClicked);
         rvBookings.setAdapter(adapter);
+        btnBack = view.findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(v ->
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack()
+        );
+        etSearch = view.findViewById(R.id.etSearch);
+
+        etSearch.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterBookings(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
 
         loadBookingsFromFirebase();
     }
@@ -55,7 +85,6 @@ public class MyBookingsFragment extends Fragment {
                 .getReference("bookings")
                 .child(userId);
 
-        // ✅ Use addListenerForSingleValueEvent to avoid conflict with manual list removal
         bookingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,21 +97,18 @@ public class MyBookingsFragment extends Fragment {
                     String time      = bookingSnap.child("time").getValue(String.class);
                     String dateTime  = bookingSnap.child("dateTime").getValue(String.class);
 
-                    // ✅ Safe timestamp read
                     long timestamp = 0;
                     Object tsObj = bookingSnap.child("timestamp").getValue();
                     if (tsObj instanceof Long) {
                         timestamp = (Long) tsObj;
                     }
 
-                    // ✅ Safe seats read
                     int seats = 0;
                     Object seatsObj = bookingSnap.child("seats").getValue();
                     if (seatsObj instanceof Long) {
                         seats = ((Long) seatsObj).intValue();
                     }
 
-                    // ✅ Safe totalPrice read
                     double totalPrice = 0;
                     Object priceObj = bookingSnap.child("totalPrice").getValue();
                     if (priceObj instanceof Double) {
@@ -94,9 +120,18 @@ public class MyBookingsFragment extends Fragment {
                     Booking booking = new Booking(bookingId, movieName, seats,
                             totalPrice, date, time, dateTime, timestamp);
                     bookingList.add(booking);
+
                 }
+                fullList.clear();
+                fullList.addAll(bookingList);
 
                 adapter.notifyDataSetChanged();
+                if (bookingList.isEmpty()) {
+                    tvNoBookings.setText("No Bookings Found");
+                }
+                else{
+                    tvNoBookings.setText("Bookings Found");
+                }
             }
 
             @Override
@@ -110,13 +145,11 @@ public class MyBookingsFragment extends Fragment {
 
     private void onCancelClicked(Booking booking, int position) {
 
-        // ✅ Compare only DATE not time (movie showtimes may have passed today)
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
 
             Date movieDate = sdf.parse(booking.getDate());
 
-            // Strip time from today for fair comparison
             String todayStr = sdf.format(new Date());
             Date today = sdf.parse(todayStr);
 
@@ -129,10 +162,8 @@ public class MyBookingsFragment extends Fragment {
 
         } catch (Exception e) {
             android.util.Log.e("CANCEL_DEBUG", "Parse error: " + e.getMessage());
-            // If date parsing fails, allow cancellation
         }
 
-        // Show confirmation dialog
         new AlertDialog.Builder(requireContext())
                 .setTitle("Cancel Booking")
                 .setMessage("Are you sure you want to cancel this booking?")
@@ -146,7 +177,6 @@ public class MyBookingsFragment extends Fragment {
                             .child(booking.getBookingId())
                             .removeValue()
                             .addOnSuccessListener(unused -> {
-                                // ✅ Find by bookingId instead of position (position may be stale)
                                 for (int i = 0; i < bookingList.size(); i++) {
                                     if (bookingList.get(i).getBookingId()
                                             .equals(booking.getBookingId())) {
@@ -167,5 +197,27 @@ public class MyBookingsFragment extends Fragment {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+    private void filterBookings(String query) {
+        ArrayList<Booking> filteredList = new ArrayList<>();
+
+        for (Booking booking : fullList) {
+            if (booking.getMovieName() != null &&
+                    booking.getMovieName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(booking);
+            }
+        }
+
+        bookingList.clear();
+        bookingList.addAll(filteredList);
+        adapter.notifyDataSetChanged();
+
+        if (bookingList.isEmpty()) {
+            tvNoBookings.setVisibility(View.VISIBLE);
+            rvBookings.setVisibility(View.GONE);
+        } else {
+            tvNoBookings.setVisibility(View.GONE);
+            rvBookings.setVisibility(View.VISIBLE);
+        }
     }
 }

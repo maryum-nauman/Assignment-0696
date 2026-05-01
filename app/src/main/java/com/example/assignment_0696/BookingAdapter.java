@@ -46,7 +46,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         holder.tvDateTime.setText(booking.getDate() + ", " + booking.getTime());
         holder.tvSeats.setText(booking.getSeats() + " Tickets");
 
-        // Set movie poster dynamically from drawable name
         int imageRes = context.getResources().getIdentifier(
                 getImageNameForMovie(booking.getMovieName()),
                 "drawable",
@@ -60,7 +59,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
                 cancelListener.onCancelClick(booking, position));
     }
 
-    // Match movie name to drawable name using JSON helper
     private String getImageNameForMovie(String movieName) {
         ArrayList<Movie> allMovies = new ArrayList<>();
         allMovies.addAll(MovieJsonHelper.getMovies(context, false));

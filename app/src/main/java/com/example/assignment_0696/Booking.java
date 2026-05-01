@@ -10,7 +10,7 @@ public class Booking {
     private String dateTime;
     private long timestamp;
 
-    public Booking() {} // required for Firebase
+    public Booking() {}
 
     public Booking(String bookingId, String movieName, int seats,
                    double totalPrice, String date, String time,
