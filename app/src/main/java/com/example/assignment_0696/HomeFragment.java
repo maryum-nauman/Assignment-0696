@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment {
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.viewBooking) {
 
-                    // ✅ Read using userId as key
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                     if (currentUser == null) {
                         Toast.makeText(getContext(), "Not logged in", Toast.LENGTH_SHORT).show();

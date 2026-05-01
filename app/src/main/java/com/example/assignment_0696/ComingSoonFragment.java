@@ -20,7 +20,6 @@ public class ComingSoonFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recyclerViewMovies);
 
-        // Load from JSON instead of hardcoding
         movieList = MovieJsonHelper.getMovies(requireContext(), true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

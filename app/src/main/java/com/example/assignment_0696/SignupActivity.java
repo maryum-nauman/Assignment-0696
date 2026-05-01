@@ -44,13 +44,11 @@ public class SignupActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-        // 1. Validate: Empty fields
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // 2. Validate: Password length >= 8
         if (password.length() < 8) {
             Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
             return;
@@ -61,7 +59,6 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        // 3. Firebase Authentication
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {

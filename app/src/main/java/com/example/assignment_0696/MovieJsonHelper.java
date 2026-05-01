@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 public class MovieJsonHelper {
 
-    // Reads movies.json from assets and returns list filtered by isComingSoon
     public static ArrayList<Movie> getMovies(Context context, boolean comingSoon) {
         ArrayList<Movie> movieList = new ArrayList<>();
         try {
-            // Read the JSON file from assets
             InputStream is = context.getAssets().open("movies.json");
             int size = is.available();
             byte[] buffer = new byte[size];
@@ -34,7 +32,6 @@ public class MovieJsonHelper {
                 String imageName  = obj.getString("image");
                 String trailerUrl = obj.getString("trailerUrl");
 
-                // Convert drawable name string to resource ID
                 int imageRes = context.getResources().getIdentifier(
                         imageName, "drawable", context.getPackageName()
                 );

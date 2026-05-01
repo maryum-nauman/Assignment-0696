@@ -133,7 +133,6 @@ public class TicketSummaryFragment extends Fragment {
     private void saveBookingToFirebase(String movieName, int seatCount,
                                        double totalPrice, String date, String time) {
 
-        // Get current logged in user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user == null) {
@@ -143,15 +142,12 @@ public class TicketSummaryFragment extends Fragment {
 
         String userId = user.getUid();
 
-        // Reference to: bookings/{userId}/{bookingId}
         DatabaseReference bookingsRef = FirebaseDatabase.getInstance()
                 .getReference("bookings")
                 .child(userId);
 
-        // Generate unique booking ID
         String bookingId = bookingsRef.push().getKey();
 
-        // Build booking data map
         Map<String, Object> bookingData = new HashMap<>();
         bookingData.put("movieName",   movieName);
         bookingData.put("seats",       seatCount);
@@ -161,7 +157,6 @@ public class TicketSummaryFragment extends Fragment {
         bookingData.put("dateTime",    date + " " + time);  // combined for easy comparison in My Bookings
         bookingData.put("timestamp",   System.currentTimeMillis()); // for cancellation check in Task 7
 
-        // Store under bookings/{userId}/{bookingId}
         bookingsRef.child(bookingId)
                 .setValue(bookingData)
                 .addOnSuccessListener(unused ->

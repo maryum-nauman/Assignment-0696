@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Required Toolbar setup for Drawer
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Drawer Toggle (Hamburger Icon) setup
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -48,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // Your existing function, now used for Drawer navigation
     public void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
@@ -61,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        // Menu Items: Home, My Bookings and Logout
         if (id == R.id.nav_home) {
             loadFragment(new HomeFragment());
         } else if (id == R.id.nav_bookings) {
@@ -74,12 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // Logic: Logout → clear session + go to Login
     private void logoutUser() {
-        // Clear Firebase Authentication session
         FirebaseAuth.getInstance().signOut();
 
-        // Clear SharedPreferences Session Management
         sharedPreferences = getSharedPreferences("CineFastPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", false);

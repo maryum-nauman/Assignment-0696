@@ -66,7 +66,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
 
         for (Movie movie : allMovies) {
             if (movie.getName().equals(movieName)) {
-                // Get drawable name from resource ID
                 return context.getResources().getResourceEntryName(movie.getImage());
             }
         }
