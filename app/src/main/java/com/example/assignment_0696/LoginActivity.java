@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox cbRememberMe;
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
+    private TextView tvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         sharedPreferences = getSharedPreferences("CineFastPrefs", MODE_PRIVATE);
 
-        // Check if user is already logged in [cite: 44]
         if (sharedPreferences.getBoolean("isLoggedIn", false)) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
@@ -37,9 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         cbRememberMe = findViewById(R.id.cbRememberMe);
         Button btnLogin = findViewById(R.id.btnLogin);
         TextView tvRegister = findViewById(R.id.tvRegisterLink);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(v -> loginUser());
         tvRegister.setOnClickListener(v -> startActivity(new Intent(this, SignupActivity.class))); // [cite: 41]
+        tvForgotPassword.setOnClickListener(v -> resetPassword());
     }
 
     private void loginUser() {
@@ -51,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Firebase Auth Login [cite: 40]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -63,6 +64,27 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void resetPassword() {
+        String email = etEmail.getText().toString().trim();
+
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Enter your email first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this,
+                                "Password reset email sent. Check your inbox.",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this,
+                                "Error: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }
